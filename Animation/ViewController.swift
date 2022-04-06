@@ -8,12 +8,13 @@
 import Spring
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet var springView: SpringView!
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var runButton: UIButton!
     
     private var firstAnimation = Animation.getAnimation()
+    private var randomAnimation = Animation.getAnimation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,17 +23,15 @@ class ViewController: UIViewController {
     }
 
     @IBAction func animationButtonPressed(_ sender: SpringButton) {
-        let randomAnimation = Animation.getAnimation()
-        
         if runButton.titleLabel?.text == "Run" {
+            randomAnimation = Animation.getAnimation()
             startAnimation(firstAnimation)
             changeDescriptionLabel(firstAnimation)
             sender.setTitle("Run \(randomAnimation.preset)", for: .normal)
-            springView.animate()
         } else {
             startAnimation(randomAnimation)
             changeDescriptionLabel(randomAnimation)
-            springView.animate()
+            randomAnimation = Animation.getAnimation()
             sender.setTitle("Run \(randomAnimation.preset)", for: .normal)
         }
     }
